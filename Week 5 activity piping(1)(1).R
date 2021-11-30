@@ -61,16 +61,19 @@ piping<-mysample %>%
 #TASK: revise this code chunk using piping
 mysample2<-mysample
 arrange(mysample2, airline)
-#mysample2<-filter(mysample2, incidents_85_99<25)
-#mysample2<-rename(mysample2, seats = avail_seat_km_per_week)
-
-piping<-mysample2 %>%
-  mutate (seats = avail_seat_km_per_week) %>%
-  subset(incidents_85_99 < 25) %>%
-  dim()%>%
-  print()
-
+mysample2<-filter(mysample2, incidents_85_99<25)
+mysample2<-rename(mysample2, seats = avail_seat_km_per_week)
 mysample3<-select(mysample2, incidents_00_14, incidents_85_99)
 mysample4<-summary(mysample3)
 print(mysample4)
+
+piping2<-mysample %>%
+  arrange(airline) %>%
+  filter(incidents_85_99 < 25) %>%
+  mutate(seats = avail_seat_km_per_week) %>% #technically not needed?
+  select(incidents_00_14, incidents_85_99) %>%
+  summary() %>%
+  print()
+
+  
 
